@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 
-{% block blockname %}
+{% block content %}
 
-<h1>Hello</h1>
+<h1>Sign Up</h1>
 
-{{ signupform.as_p }}
+<form action = '.' method="post">
 
-{% endblock blockname %}
+    {% csrf_token %}
+
+    {{ signupform.as_p }}
+
+    <input type="submit" name="sign up">
+
+</form>
+
+{% endblock content %}
