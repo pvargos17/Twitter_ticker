@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 def index(request):
@@ -11,20 +11,28 @@ def index(request):
                 signupform.save() # shortcut to save user
                 username = signupform.cleaned_data['username']
                 password = signupform.cleaned_data['password1']
-                authenticate(username=username, password=password)
-                return render(request, "home.html", {'username': username})
+                user = authenticate(username=username, password=password)
+                login(request, user )
+                return render(request, "home.html")
         elif "signin" in request.POST:
             signinform = AuthenticationForm(data=request.POST)
             if signinform.is_valid():
-                username = signinform.cleaned_data['username']
-                password = signinform.cleaned_data['password']
-                authenticate(username=username, password=password)
-                return render(request, "home.html", {'username': username})
+                login(request, signinform.get_user())
+                return render(request, "home.html")
+
     signupform = UserCreationForm()
     signinform = AuthenticationForm()
 
     return render(request, "index.html", {"signupform": signupform,
                                         "signinform":signinform})
+
+
+
+# @login_required
+def signout(request):
+    logout(request)
+    return redirect('/')
+
 
 
 # def profile(request):
