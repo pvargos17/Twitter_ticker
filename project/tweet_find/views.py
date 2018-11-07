@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 def index(request):
-    if request.method = 'POST':
-        signupform = UserCreationForm(data=request.Post)
+    if request.method == 'POST':
+        signupform = UserCreationForm(data=request.POST)
         if signupform.is_valid():
-            user = signupform.cleaned_data['username']
+            username = signupform.cleaned_data['username']
             password = signupform.cleaned_data['password1']
-
+            signupform.save() # shortcut to save user
             return render(request, "index.html", {'signupform': signupform,
                                                 'username': username,
                                                 'pwd' : password})

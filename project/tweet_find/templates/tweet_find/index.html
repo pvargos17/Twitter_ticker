@@ -3,6 +3,8 @@
 {% block content %}
 
 <h1>Sign Up</h1>
+<h2>{{hello}}</h2>
+<p>{{username}} - {{pwd}}</p>
 
 <form action = '.' method="post">
 
@@ -10,7 +12,7 @@
 
     {{ signupform.as_p }}
 
-    <input type="submit" name="sign up">
+    <input type="submit" name="signup">
 
 </form>
 
