@@ -2,9 +2,20 @@
 
 {% block content %}
 
+<h1>Sign In</h1>
+
+<form action = '.' method ="post">
+
+    {% csrf_token %}
+
+    {{ signinform.as_p }}
+
+    <input type="submit" name="signin">
+
+</form>
+
 <h1>Sign Up</h1>
-<h2>{{hello}}</h2>
-<p>{{username}} - {{pwd}}</p>
+
 
 <form action = '.' method="post">
 
