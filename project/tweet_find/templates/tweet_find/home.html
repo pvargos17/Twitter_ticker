@@ -4,6 +4,19 @@
 
 <p>Hello {{user}}!</p>
 
+<p>{{ data }}</p>
+
 <a href="{% url 'signout' %}">Logout</a>
+
+<form action="." method="post">
+
+    {% csrf_token %}
+
+    {{queryform.as_p}}
+
+    <input type="submit" name="ticker sysmbol">
+
+
+</form>
 
 {% endblock content %}

@@ -1,8 +1,9 @@
+import requests
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+from .forms import TickerSymbol
 def index(request):
     if request.method == 'POST':
         if 'signup' in request.POST:
@@ -13,12 +14,12 @@ def index(request):
                 password = signupform.cleaned_data['password1']
                 user = authenticate(username=username, password=password)
                 login(request, user )
-                return render(request, "home.html")
+                return redirect('home')
         elif "signin" in request.POST:
             signinform = AuthenticationForm(data=request.POST)
             if signinform.is_valid():
                 login(request, signinform.get_user())
-                return render(request, "home.html")
+                return redirect('home')
 
     signupform = UserCreationForm()
     signinform = AuthenticationForm()
@@ -32,6 +33,19 @@ def index(request):
 def signout(request):
     logout(request)
     return redirect('/')
+
+def home(request):
+    if request.method == "POST":
+        queryform = TickerSymbol(data=request)
+        if queryform.is_valid():
+            ticker = queryform.cleaned_data['ticker']
+
+            base_url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker}&apikey=NW6Y1YYJB06MMXP7"
+            response = requests.get(base_url)
+            data = response.json()
+            return render(request, 'home.html',{'data':data})
+    queryform = TickerSymbol()
+    return render(request, 'home.html', {'queryform' : queryform})
 
 
 
