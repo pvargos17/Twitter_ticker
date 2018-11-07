@@ -3,6 +3,16 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 def index(request):
+    if request.method = 'POST':
+        signupform = UserCreationForm(data=request.Post)
+        if signupform.is_valid():
+            user = signupform.cleaned_data['username']
+            password = signupform.cleaned_data['password1']
+
+            return render(request, "index.html", {'signupform': signupform,
+                                                'username': username,
+                                                'pwd' : password})
+
     signupform = UserCreationForm()
     return render(request, "index.html", {"signupform": signupform})
 
