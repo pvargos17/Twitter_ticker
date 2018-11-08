@@ -38,9 +38,8 @@ def home(request):
     if request.method == "POST":
         queryform = TickerSymbol(data=request)
         if queryform.is_valid():
-            ticker = queryform.cleaned_data['ticker']
-
-            base_url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker}&apikey=NW6Y1YYJB06MMXP7"
+            ticker_symbol = queryform.cleaned_data['ticker_symbol']
+            base_url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker}&apikey=NW6Y1YYJB06MMXP7"
             response = requests.get(base_url)
             data = response.json()
             return render(request, 'home.html',{'data':data})
