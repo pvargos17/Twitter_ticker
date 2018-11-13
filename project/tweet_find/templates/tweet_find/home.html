@@ -4,7 +4,9 @@
 
 <p>Hello {{user}}!</p>
 
-<p>{{ data }}</p>
+<p>{{data}}</p>
+
+
 
 <a href="{% url 'signout' %}">Logout</a>
 
@@ -12,7 +14,7 @@
 
     {% csrf_token %}
 
-    {{queryform.as_p}}
+    {{ queryform.as_p }}
 
     <input type="submit" name="ticker sysmbol">
 

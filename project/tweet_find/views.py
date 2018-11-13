@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import TickerSymbol
+from .company_name import mydict
 def index(request):
     if request.method == 'POST':
         if 'signup' in request.POST:
@@ -38,6 +39,8 @@ def home(request):
     if request.method == 'POST':
         queryform = TickerSymbol(data=request.POST)
         if queryform.is_valid():
+
+            # add bullshit (company name)
             ticker_symbol = queryform.cleaned_data['ticker_symbol']
             base_url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker_symbol}&apikey=NW6Y1YYJB06MMXP7"
             response = requests.get(base_url)
@@ -45,6 +48,8 @@ def home(request):
             return render(request, 'home.html',{'data':data})
     queryform = TickerSymbol()
     return render(request, 'home.html', {'queryform' : queryform})
+
+
 
 
 
