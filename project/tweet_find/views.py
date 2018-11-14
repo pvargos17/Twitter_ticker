@@ -39,7 +39,7 @@ def home(request):
     if request.method == 'POST':
         queryform = TickerSymbol(data=request.POST)
         if queryform.is_valid():
-
+            company = mydict[ticker_symbol]
             # add bullshit (company name)
             ticker_symbol = queryform.cleaned_data['ticker_symbol']
             base_url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker_symbol}&apikey=NW6Y1YYJB06MMXP7"
