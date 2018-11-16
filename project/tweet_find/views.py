@@ -9,7 +9,7 @@ import os
 from pprint import pprint
 import tweepy
 from .company_name import mydict
-from secrets import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET
+from .secrets import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET
 
 
 
@@ -50,15 +50,15 @@ def home(request):
             auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
             auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
             api = tweepy.API(auth)
-            max_tweets = 100
-            query = mydict[f'{queryform}']
+            max_tweets = 10
+            ticker_symbol = queryform.cleaned_data['ticker_symbol']
+            query = mydict[ticker_symbol]
             searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
             data2 = searched_tweets
-            ticker_symbol = queryform.cleaned_data['ticker_symbol']
             base_url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker_symbol}&apikey=NW6Y1YYJB06MMXP7"
             response = requests.get(base_url)
             data = response.json()
-            return render(request, 'home.html',{'data':data})
+            return render(request, 'home.html',{'data':data}, {'data2': data2})
     queryform = TickerSymbol()
     return render(request, 'home.html', {'queryform' : queryform})
 

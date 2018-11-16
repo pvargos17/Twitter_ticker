@@ -14,3 +14,6 @@ max_tweets = 1000
 searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
 
 print(searched_tweets)
+
+
+return render(request, 'home.html',{'data':data, 'data2': data2}
