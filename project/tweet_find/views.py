@@ -4,24 +4,15 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import TickerSymbol
-import os
 import json
+import os
 from pprint import pprint
 import tweepy
+from .company_name import mydict
+from secrets import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET
 
 
-# fetch the secrets from our virtual environment variables
-CONSUMER_KEY = os.environ['FrIxnMTw6AlZmicChD1Mmcg7h']
-CONSUMER_SECRET = os.environ['bgVWxRgNzj93XDktc0PNUMAgC6LTUflarm5Djuv7sJItlySsA9']
-ACCESS_TOKEN = os.environ['710509107472678912-SDq2Rq0iNGcCRGVO8dwgft2Q4mZNyZG']
-ACCESS_SECRET = os.environ['tJmHPIpWrlnIB7pxKshxp2ttJc2B9u5OPLl1AqMBbIIpk']
 
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
-# create the connection
-api = tweepy.API(auth)
-
-# from .company_name import mydict
 def index(request):
     if request.method == 'POST':
         if 'signup' in request.POST:
@@ -56,8 +47,13 @@ def home(request):
     if request.method == 'POST':
         queryform = TickerSymbol(data=request.POST)
         if queryform.is_valid():
-            # company = mydict[ticker_symbol]
-            # add bullshit (company name)
+            auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+            auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+            api = tweepy.API(auth)
+            max_tweets = 100
+            query = mydict[f'{queryform}']
+            searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
+            data2 = searched_tweets
             ticker_symbol = queryform.cleaned_data['ticker_symbol']
             base_url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker_symbol}&apikey=NW6Y1YYJB06MMXP7"
             response = requests.get(base_url)
