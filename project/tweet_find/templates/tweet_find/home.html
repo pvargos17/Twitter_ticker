@@ -6,7 +6,15 @@
 
 <p>{{data}}</p>
 
-<p>{{data2}}</p>
+
+
+{% for tweet in data2 %}
+    <p>{{tweet.text}}</p>
+<br>
+<br>
+<br>
+
+{% endfor %}
 
 
 <a href="{% url 'signout' %}">Logout</a>

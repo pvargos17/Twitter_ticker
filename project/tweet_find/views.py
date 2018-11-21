@@ -53,12 +53,15 @@ def home(request):
             max_tweets = 10
             ticker_symbol = queryform.cleaned_data['ticker_symbol']
             query = mydict[ticker_symbol]
+            # print(query)
             searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
             data2 = searched_tweets
+            # print(data2)
             base_url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker_symbol}&apikey=NW6Y1YYJB06MMXP7"
             response = requests.get(base_url)
             data = response.json()
-            return render(request, 'home.html',{'data':data}, {'data2': data2})
+            # print(data)
+            return render(request, 'home.html',{'data':data, 'data2': data2})
     queryform = TickerSymbol()
     return render(request, 'home.html', {'queryform' : queryform})
 
