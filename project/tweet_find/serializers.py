@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from .forms import TickerSymbol
+from .models import Company
 
-class TickerSymbolSerializer(serializers.FormSerializer):
+
+class CompanySerializer(serializers.ModelSerializer):
     class Meta:
-        form = TickerSymbol
-        field = ("ticker_symbol")
+        model = Company
+        fields = ("company_name","ticker_symbol")
 

@@ -10,7 +10,9 @@ from pprint import pprint
 import tweepy
 from .company_name import mydict
 from .secrets import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET
-
+from rest_framework import generics
+from .models import Company
+from .serializers import CompanySerializer
 
 
 def index(request):
@@ -67,7 +69,12 @@ def home(request):
 
 
 
-
+class ListCompanyView(generics.ListAPIView):
+    """
+    Provides a get method handler.
+    """
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
 
 # def profile(request):
 #     if request.method == 'POST':
