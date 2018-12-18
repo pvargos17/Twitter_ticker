@@ -8,8 +8,8 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ("company_name","ticker_symbol")
 
-# class TweetSerialzer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Tweets
-#         field = ("company_tweets")
+class TweetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tweets
+        field = ("company_tweets")
 

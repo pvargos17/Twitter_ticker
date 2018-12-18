@@ -1,4 +1,7 @@
 from django.db import models
+from .forms import TickerSymbol
+
+
 
 # Create your models here.
 class Company(models.Model):
@@ -12,4 +15,7 @@ class Company(models.Model):
 class Tweets(models.Model):
     # tweets for a given company
     company_tweets= models.CharField(max_length = 140, null = False)
+
+    def __str__(self):
+        return "{} - {}".format(self.company_tweets)
 
