@@ -11,7 +11,7 @@ import tweepy
 from .company_name import mydict
 from .secrets import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET
 from rest_framework import generics
-from .models import Company
+from .models import Company, Tweets
 from .serializers import CompanySerializer
 
 
@@ -76,6 +76,10 @@ class ListCompanyView(generics.ListAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
+# class ListCompanyTweetView(generics.ListAPIView):
+
+#     queryset = Tweets.objects.all()
+#     serializers_class = TweetSerialzer
 # def profile(request):
 #     if request.method == 'POST':
 #         apiform = ApiCallForm(data=request.POST)
