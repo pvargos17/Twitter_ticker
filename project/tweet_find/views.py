@@ -11,8 +11,8 @@ import tweepy
 from .company_name import mydict
 from .secrets import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET
 from rest_framework import generics
-from .models import Company, Tweets
-from .serializers import CompanySerializer, TweetSerializer
+from .models import Company, Load
+from .serializers import CompanySerializer, LoadSerializer
 
 
 def index(request):
@@ -69,6 +69,8 @@ def home(request):
 
 
 
+
+
 class ListCompanyView(generics.ListAPIView):
     """
     Provides a get method handler.
@@ -76,10 +78,10 @@ class ListCompanyView(generics.ListAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
-class ListCompanyTweetView(generics.ListAPIView):
+class ListLoadView(generics.ListAPIView):
 
-    queryset = Tweets.objects.all()
-    serializers_class = TweetSerializer
+    queryset = Load.objects.all()
+    serializer_class = LoadSerializer
 
 
 

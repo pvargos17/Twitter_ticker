@@ -12,10 +12,12 @@ class Company(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.company_name, self.ticker_symbol)
-class Tweets(models.Model):
-    # tweets for a given company
-    company_tweets= models.CharField(max_length = 140, null = False)
+class Load(models.Model):
+
+    company_list = models.CharField(max_length = 1000000, null = False)
+
+    ticker = models.CharField(max_length = 5 , null = False)
 
     def __str__(self):
-        return "{} - {}".format(self.company_tweets)
+        return "{} - {}".format(self.company_list, self.ticker)
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Company, Tweets
+from .models import Company, Load
 from .company_name import mydict
 
 
@@ -8,8 +8,9 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ("company_name","ticker_symbol")
 
-class TweetSerializer(serializers.ModelSerializer):
+class LoadSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tweets
-        field = ("company_tweets")
+        model = Load
+        fields = ("company_name", "ticker_symbol")
+
 
