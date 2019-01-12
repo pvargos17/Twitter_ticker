@@ -11,4 +11,4 @@ class CompanySerializer(serializers.ModelSerializer):
 class LoadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Load
-        fields = ("company_name", "ticker_symbol")
+        fields = ("company_name", "ticker")
