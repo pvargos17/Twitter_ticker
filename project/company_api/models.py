@@ -1,5 +1,5 @@
 from django.db import models
-
+from company_name import mydict
 
 # Create your models here.
 class Company(models.Model):
