@@ -1,5 +1,5 @@
 from django.db import models
-from company_name import mydict
+# from company_name import mydict
 
 # Create your models here.
 class Company(models.Model):
@@ -11,7 +11,7 @@ class Company(models.Model):
     def __str__(self):
         return "{} - {}".format(self.company_name, self.ticker_symbol)
 
-class Load(models.Model):
+# class Load(models.Model):
 
     company_list = models.CharField(max_length = 1000000, null = False)
 
