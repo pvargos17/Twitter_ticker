@@ -52,7 +52,7 @@ def home(request):
             auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
             auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
             api = tweepy.API(auth)
-            max_tweets = 10
+            max_tweets = 25
             ticker_symbol = queryform.cleaned_data['ticker_symbol']
             query = mydict[ticker_symbol]
             # print(query)
