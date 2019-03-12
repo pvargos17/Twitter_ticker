@@ -84,8 +84,8 @@ class ListLoadView(generics.ListAPIView):
     serializer_class = LoadSerializer
 
 
-#start here
-
+# start here.
+# For loop for to bypass manual data entry for companies tweets
 
 
 # def profile(request):
