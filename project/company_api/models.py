@@ -19,4 +19,4 @@ class Company(models.Model):
 
 #     def __str__(self):
 #         return "{} - {}".format(self.company_list, self.ticker)
- # need to add here ####
+
