@@ -20,3 +20,4 @@ class Company(models.Model):
 #     def __str__(self):
 #         return "{} - {}".format(self.company_list, self.ticker)
 
+# change module here
