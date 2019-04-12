@@ -11,13 +11,13 @@ class Company(models.Model):
     def __str__(self):
         return "{} - {}".format(self.company_name, self.ticker_symbol)
 
-# class Load(models.Model):
+class Load(models.Model):
 
-#     company_list = models.CharField(max_length = 1000000, null = False)
+    company_list = models.CharField(max_length = 1000000, null = False)
 
-#     ticker = models.CharField(max_length = 5 , null = False)
+    ticker = models.CharField(max_length = 5 , null = False)
 
-#     def __str__(self):
-#         return "{} - {}".format(self.company_list, self.ticker)
+    def __str__(self):
+        return "{} - {}".format(self.company_list, self.ticker)
 
 # change module here
